@@ -1,5 +1,6 @@
 const Tour = require('./../models/tourModels')
 const { toUSVString } = require('util');
+const { trusted } = require('mongoose');
 
 
 
@@ -62,24 +63,42 @@ try{
 }
 }
 
-exports.updateTour = (req, res) =>{
+exports.updateTour = async (req, res) =>{
        
+       try {
+        const tour= await Tour.findByIdAndUpdate(req.params.id, req.body, {
+                new:true,
+                runValidators:true
+        }); 
         res.status(200).json({
                 status:'succes',
                 data:{
-                        tour:'<Updated here>',
-                        
+                        tour
                 }
         });
-}
+       } catch (err) {
+        res.status(400).json({
+                status:'fail',
+                message:err
+        });
+       }
+};
 
-exports.deleteTour =  (req, res) =>{
+exports.deleteTour =  async (req, res) =>{
        
-        res.status(204).json({
-                status:'succes',
-                data:{
-                       // tour:'<Updated here>'
-                        tour:null
-                }
+       try {
+        await Tour.findByIdAndDelete(req.params.id)
+        res.status(200).json({
+                status:'success',
+                data:null
+                       
+                
         })
+        
+       } catch (err) {
+        res.status(400).json({
+                status:'fail',
+                message:err
+        });
+       }
 }
