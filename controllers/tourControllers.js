@@ -1,6 +1,8 @@
 const Tour = require('./../models/tourModels')
 const { toUSVString } = require('util');
 const { trusted } = require('mongoose');
+const { match } = require('assert');
+const { json } = require('express');
 
 
 
@@ -9,7 +11,34 @@ const { trusted } = require('mongoose');
 
 exports.getAllTours = async (req, res) =>{
         try{ 
-        const tours =  await Tour.find();
+                // BUILD A QUERY
+                const queryObj = { ...req.query };
+                const excludeFields = ['page', 'sort','limit', 'fields'];
+                excludeFields.forEach(el => delete queryObj[el]);
+               
+               //ADVANCED FILTERING 
+               let queryStr = JSON.stringify(queryObj); //converter para string
+               queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g,  match => `$${match}`);
+
+               //{difficulty: 'easy', duration:'{$gte: 5}}
+               //{difficulty: 'easy', duration:'{gte: 5}}
+               //gte, gt, lte, lt
+               console.log(JSON.parse(queryStr))
+
+        // const tours =  await Tour.find({
+        //         duration:'easy',
+        //         duration:5
+        // });
+        // const tours = await Tour.find()
+        // .where('duration').equals(5)
+        // .where('difficulty').equals('easy')
+
+        const query = Tour.find(JSON.parse(queryStr))//para fazer directamente do postman
+
+        //EXCECUTE QUERY 
+        const tours = await query;
+
+        // SEND RESPONSE
         res.status(200).json({
                 status:'success',
                 results: tours.length,
