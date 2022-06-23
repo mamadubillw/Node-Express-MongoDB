@@ -1,0 +1,7 @@
+ runing as specific file
+ node dev-data/data/import-dev-data.js --import
+ node dev-data/data/import-dev-data.js --delete
+
+ ordenacao decrescente = 127.0.0.1:3000/api/v1/tours?sort=-price,-ratingsAverage
+
+ excluding fields = 127.0.0.1:3000/api/v1/tours?fields=-name,-duration,-difficulty,-price
