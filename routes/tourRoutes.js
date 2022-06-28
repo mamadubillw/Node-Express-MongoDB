@@ -11,6 +11,7 @@ const router = express.Router();
 // ad it to the pst handler stack
 
 router.route('/top-5-cheap').get(tourController.aliasTopTours, tourController.getAllTours);
+router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
 
 router.route('/tour-stats').get(tourController.getTourStats, tourController.getAllTours);
 router.route('/')

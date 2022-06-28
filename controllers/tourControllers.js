@@ -9,13 +9,13 @@ const { json } = require('express');
 exports.aliasTopTours = (req, res, next) =>{
         req.query.limit = '5';
         req.query.sort = '-ratingsAverage,price';
-        req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+        req.query.field = 'name,price,ratingsAverage,summary,difficulty';
 
         next();
 };
 
 exports.getAllTours = async (req, res) =>{
-        try{ 
+        try{
              
         
         //EXCECUTE QUERY 
@@ -122,7 +122,7 @@ exports.getTourStats = async (req, res) =>{
         try {
                 const stats = await Tour.aggregate([
                         {
-                                $match: {ratingsAverage:{$gte:4.5}}
+                                $match: {ratingsAverage:{$gte:'4.5'}}
                         },
                         {
                                 $group: {
@@ -140,9 +140,9 @@ exports.getTourStats = async (req, res) =>{
                         {
                                 $sort:{avgPrice: 1}
                         },
-                        // {
-                        //         $match: {_id:{$ne:'EASY'}}
-                        // }
+                        {
+                                $match: {_id:{$ne:'EASY'}}
+                        }
                 ]);
                 res.status(200).json({
                         status:'success',
@@ -156,5 +156,26 @@ exports.getTourStats = async (req, res) =>{
                         status:'fail',
                         message:err
                 });
+        }
+}
+
+exports.getMonthlyPlan = async (req, res) =>{
+        try {
+                const year = rea.params.year * 1;
+                const plan = await Tour.aggregate([])
+                res.status(200).json({
+                        
+                        status:'success',
+                        data:{
+                                plan
+                        }
+                });
+                
+        } catch (err) {
+                res.status(400).json({
+                        status:'fail',
+                        message:err
+                });
+        
         }
 }
