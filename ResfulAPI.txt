@@ -1,0 +1,44 @@
+6 NESCESSIDADES PARA SER RESTFUL 
+
+_CLIENTE_SERVER : Separacao do cliente e do \rmazenamento de dados (servidor) dessa forma podemos ter portabilidade do nosso sistema usando rest para web e react native para smatphone
+
+_STSTELESS : Cada requisicao que o cliente faz para o servidor devera conter todas as informacoes nescessarias para o servidor entender e responder a requisicao Ex: A sessao do usuario devera ser enviado em todas as as requisicoes para saber se aquele ususario esta autenticado e apto para usar servcos  e o servidor nao pode lembrar que o cliente foi autenticado na requisicao anterior 
+
+_CACHEABLE : As respostas para uma rewuiscao deverao ser explicitas ao dizer se aquela requisicao pode oou nao ser cacheada pelo cliente
+
+_LAYERED_SYSTEM : O cliente acessa a um endpoint sem precisar saber da complexidade de quais passos estao sendo nescessarios para o servidor responder a requisicao ou quais outras camadas o servidor esta lidando para que a requisicao seja respondida
+
+
+Uniform Interface é a obrigação REST que está faltando =) 
+
+
+Você sabe o momento que estou explicando sobre as boas práticas e tudo mais? Então, ali já e a aplicação da `Uniform Interface`.
+
+
+Uniform significa "uniforme", ou seja, uma única forma. Podemos usar a palavra consistente, constante, padrão ou coerente certo?? Pois sim...  
+
+O que é então uma Interface Uniforme? É bem tranquilo... 
+
+
+Sabe quando falei que se você escolher o endpoint `/client` do seu resource, você deve sempre seguir isso para todos os seus Resources? Então, a interface que você está construindo para os resources está seguindo essa constraint. Você criou uma padronização dos seus resources. 
+
+
+Então, posso afirmar que (por enquanto) você está seguindo corretamente a proposta.
+
+
+Sabe quando falo que usamos por padrão o .json como formato de escrita das mensagens? Então. Desde que sua API não fiquei usando uma hora json, outra hora xml,  outra hora outro formato, você continua seguindo o conceito de uniformidade da interface, e maneira de se comunicar está bacana. Sua API está coerente até aqui. 
+
+
+Sabe quando falo que nossa API precisa enviar detalhes para quem está consumindo ela? Então, precisamos sempre manter nosso resource com informações suficientes para quem vai consumi-lo. Talvez links para outros endpoints, por exemplo. Muito bem, estamos coerentes neste passo também. 
+
+
+Até aqui, fica intuitivo e tranquilo para meu cliente entender como minha API funciona, e o que posso fazer com ela, então, Interface está Uniforme.
+
+
+Sabe, também, quando falo que devemos usar bem certinho os verbos HTTP para comunicação clara e efetiva? É isso! Matou a charada!! O uso correto dos verbos é coerente, então, estamos sendo uniformes na nossa interface.
+
+
+Por fim, já ficou claro os conceitos que você deve usar para criar a interface de comunicação da sua API para ser uniforme! 
+
+
+Faz sentido pra você?
