@@ -35,7 +35,7 @@ class APIFeatures {
                         this.query = this.query.select('-__v');
                 }
 
-                return this;
+return this;
         }
 
         paginate(){

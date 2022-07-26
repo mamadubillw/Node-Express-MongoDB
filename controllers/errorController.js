@@ -10,11 +10,14 @@ const handleDuplicateFieldsDB = err =>{
         const value = err.message.match(/(["'])(\\?.)*?\1/)[0];
         console.log(value);
         const message = `Duplicate field value:  please use another value`;
+        console.log(message)
+
                 return new AppError (message, 404);
 }
 const handleValidationErrorDB = err => {
         const errors = Object.values(err.errors).map(el => el.message);
         const message = `Invalid input data. ${errors.join('. ')}`;
+        console.log(message)
         return new AppError(message, 400);
 }
 
@@ -26,6 +29,7 @@ const sendErrorDev = (err, res) => {
                 stack: err.stack
         });
 }
+ 
 const sendErrorProd = (err, res) => {
         //Operational, trusted error: send message to client
         if(err.isOperational){

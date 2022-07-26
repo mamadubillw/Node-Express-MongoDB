@@ -15,7 +15,7 @@ exports.aliasTopTours = (req, res, next) =>{
 
         next();
 };
-
+ 
 exports.getAllTours = catchAsync(async (req, res, next) =>{
         //EXCECUTE QUERY 
 
@@ -24,7 +24,7 @@ exports.getAllTours = catchAsync(async (req, res, next) =>{
               
         // SEND RESPONSE
         res.status(200).json({
-                status:'success',
+                status:'success', 
                 results: tours.length,
                 // resultat:tours.length,
                 data:{
@@ -46,6 +46,7 @@ exports.getTour = catchAsync(async (req, res, next) =>{
                         }
        
 });
+        //return(next())
 });
 
 
@@ -59,6 +60,8 @@ exports.createTour = catchAsync(async  (req, res, next) =>{
                          tour: newTour
                  }
         });
+
+        //return(next())
 });
 
 exports.updateTour =catchAsync(async (req, res, next) =>{

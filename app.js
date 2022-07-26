@@ -37,8 +37,10 @@ app.all('*', (req, res, next) =>{
         //quando next e passado um argumento geralmente e um error
         next(new AppError(`Cant find ${req.originalUrl} on this server`, 404));
 });
+ 
+app.use(globalErrorHandler);   
+//UM MIDDLEWARE DEPOIS Q JA FIZEMOS UM REQUISICAO
 
-app.use(globalErrorHandler);
 
 
 module.exports = app;

@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
                 type:String,
                 required: [true, 'Please confirm your password'],
                 //This only works on CREATE AND SAVE !!!
-                // RAZAO : quando estamos se inscrevenso numa pagina precisamos de fornecer informacao pela 1vez nessa etapa temos CREATE que e criar e SAVE que e salvar  e por isso verifice se as palavras pasees fornecidas sao mesmas
+                // RAZAO : quando estamos se inscrevenso numa pagina precisamos de fornecer informacao pela 1vez nessa etapa temos CREATE que e criar e SAVE que e salvar  e por isso verifice se as palavras pasees fornecidas sao mesmas entao depois disso e so vir e logar
                 validate:{
                         validator: function(el){
                                 return el === this.password;
@@ -41,8 +41,13 @@ userSchema.pre('save',async function(next){
         if(!this.isModified('password')) return next();
         // hash the password with cost of 12
         this.password =await bcrypt.hash(this.password, 12);
+        //delte passwordConfirm field
         this.passwordConfirm = undefined;
         next();
-})
+});
+
+userSchema.methods.correctPassword = async function(candidatePassword, userPassword){
+        return await bcrypt.compare(candidatePassword, userPassword)
+}
 const User = mongoose.model('User', userSchema);
 module.exports = User;
