@@ -10,3 +10,5 @@ intall ndb node debuger : npm run debug
 
 Remove Large File :  git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch  node_modules/carlo/lib/.local-data/win64-624492/chrome-win/chrome_child.dll'
 remover commit "pendentes --tentava um push mas com lar4ge files" :  git reset --soft HEAD~
+
+VIRTUAL PROPRIETIES : ARE FIELD THAT WE CAN DEFINE ON SCHEMA BUT IT WILL NOT BE PERSISTED EX : MILES TO KM podemos guardar so um ja que podemos converter para outro facilmente

@@ -44,3 +44,11 @@ exports.login =catchAsync(async (req, res, next) => {
                 token
         });
 });
+
+exports.protect = catchAsync((req, res, next) =>{
+        // 1) Getting Token and check of it's true 
+        // 2) Verification Token 
+        // 3) Check if user still exists
+        // 4) Check if user changed password after the token was issue
+        next();
+ })

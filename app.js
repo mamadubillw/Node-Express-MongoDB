@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === 'development'){
 // app.use = global middleware 
 
  // that will return one function similar to fuc middlewere      
-app.use(express.json()); // Retorna uma funcao que permitira next
+app.use(express.json()); // Retorna uma funcao que permitira next req e res
 app.use(express.static(`${__dirname}/public`)) // acces to files html
 
 
