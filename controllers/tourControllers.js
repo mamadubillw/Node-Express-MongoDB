@@ -16,7 +16,7 @@ exports.aliasTopTours = (req, res, next) =>{
         next();
 };
  
-exports.getAllTours = catchAsync(async (req, res, next) =>{
+exports.getAllTours = catchAsync(async (req, res) =>{
         //EXCECUTE QUERY 
 
         const features = new APIFeatures(Tour.find(), req.query).filter().sort().limitFields().paginate();
@@ -51,7 +51,7 @@ exports.getTour = catchAsync(async (req, res, next) =>{
 
 
 
-exports.createTour = catchAsync(async  (req, res, next) =>{
+exports.createTour = catchAsync(async  (req, res) =>{
         const newTour = await Tour.create(req.body);
 
         res.status(201).json({
@@ -99,7 +99,7 @@ exports.deleteTour = catchAsync(async (req, res, next) =>{
 })
 
         //CORRECAO
-exports.getTourStats =catchAsync(async (req, res, next) =>{
+exports.getTourStats =catchAsync(async (req, res) =>{
                 const stats = await Tour.aggregate([
                         {
                                 $match: {ratingsAverage:{$gte:'4.5'}}
@@ -132,7 +132,7 @@ exports.getTourStats =catchAsync(async (req, res, next) =>{
                 });
 })
 
-exports.getMonthlyPlan =catchAsync(async (req, res, next) =>{
+exports.getMonthlyPlan =catchAsync(async (req, res) =>{
         
                 const year = req.params.year * 1;
                 const plan = await Tour.aggregate([
