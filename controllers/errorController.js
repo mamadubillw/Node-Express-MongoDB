@@ -21,6 +21,10 @@ const handleValidationErrorDB = err => {
         return new AppError(message, 400);
 }
 
+const handleJWTError = err =>  new AppError('Inalid token, please log in again', 401);
+
+const handleExpiredError = err => new AppError('Your token has expired, Please log in again', 401);
+
 const sendErrorDev = (err, res) => {
         res.status(err.statusCode).json({
                 status: err.status,
@@ -66,6 +70,10 @@ module.exports = (err, req, res, next) =>{
                 if(error.code === 11000) error = handleDuplicateFieldsDB(error);
                 // ex: um codigo curto ou tem mais de que caracteres pedidos
                 if(error.name === 'ValidatorError') error = handleValidationErrorDB(error);
+                // JWT ERROR
+                if(err.name === 'JsonWebTokenError') error = handleJWTError(error);
+                //EXP ERRoR
+                if(err.name === 'TokenExpiredError') error = handleExpiredError(error);
 
                 sendErrorProd(error, res);
         }
