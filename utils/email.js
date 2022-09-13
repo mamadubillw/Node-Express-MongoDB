@@ -7,7 +7,7 @@ const sendEmail = async options =>{
         port: process.env.EMAIL_PORT,
         auth:{
             user: process.env.EMAIL_USERNAME,
-            PASS: process.env.EMAIL_PASSWORD
+            pass: process.env.EMAIL_PASSWORD
         }
         // Activate in gmail  "less secure app" option
     });
