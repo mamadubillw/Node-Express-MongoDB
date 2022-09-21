@@ -11,7 +11,7 @@ const filterObj = (obj, ...allowedFields) =>{
         return newObj; 
 }
 
-exports.getAllUsers =catchAsync(async (req, res) =>{
+exports.getAllUsers =catchAsync(async (req, res, next) =>{
         const users = await User.find();
         res.status(200).json({
                 status: 'success',
@@ -46,7 +46,7 @@ exports.updateMe = catchAsync(async(req, res, next) =>{
         //filtered out unwanted fields tha are not be allowed to be updated
         const filteredBody = filterObj(req.body, 'name', 'email');
         const updateUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {new: true, runValidators:true})
-        //await user.save(); porque
+        //await user.save(); porque      
         res.status(200).json({
                 status: 'success',
                 data:{
@@ -54,6 +54,14 @@ exports.updateMe = catchAsync(async(req, res, next) =>{
                 }
         })
 });
+
+exports.deleteMe = catchAsync(async(req, res, next) =>{
+        await User.findByIdAndUpdate(req.user.id, {active: false});
+        res.status(204).json({
+                status: 'success',
+                data: null
+        })
+})
 
 exports.updateUser = (req, res) =>{
         res.status(500).json({
