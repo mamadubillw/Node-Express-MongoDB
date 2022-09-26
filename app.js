@@ -3,6 +3,7 @@ const app = express();
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const morgan = require('morgan'); //middlewere
+const rateLimit = require('express-rate-limit');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 
@@ -14,6 +15,12 @@ if(process.env.NODE_ENV === 'development'){
 
 // app.use = global middleware 
 
+const limiter = rateLimit({
+        max:100,
+        windowMs:60 * 60 * 1000,
+        message: 'tOO many request from this ip, please try again an 1 hour'
+});
+app.use('/api',limiter);
  // that will return one function similar to fuc middlewere      
 app.use(express.json()); // Retorna uma funcao que permitira next req e res
 app.use(express.static(`${__dirname}/public`)) // acces to files html
