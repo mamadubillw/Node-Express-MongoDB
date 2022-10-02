@@ -33,7 +33,7 @@ exports.getAllTours = catchAsync(async (req, res, next) =>{
 });
 
 exports.getTour = catchAsync(async (req, res, next) =>{
-        
+                //populate taz todos os dados de uma reference
                 const tour = await Tour.findById(req.params.id);
                 // Se mudamos uma letra no id devolve um sucesso com o tour null e por isso 
                 if(!tour){
