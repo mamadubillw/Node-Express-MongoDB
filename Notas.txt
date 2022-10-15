@@ -6,7 +6,7 @@
 
  excluding fields = 127.0.0.1:3000/api/v1/tours?fields=-name,-duration,-difficulty,-price
 
-intall ndb node debuger : npm run debug
+install ndb node debugger : npm run debug
 
 Remove Large File :  git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch  node_modules/carlo/lib/.local-data/win64-624492/chrome-win/chrome_child.dll'
 remover commit "pendentes --tentava um push mas com lar4ge files" :  git reset --soft HEAD~
